@@ -22,7 +22,7 @@ public class NotificaAlarme extends BroadcastReceiver {
 
         Tarefa tarefa = (Tarefa)intent.getExtras().getSerializable("tarefa");
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int)tarefa.id, newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification nt = new Notification.Builder(context)
                 .setTicker("ToDo - Lembrete")
