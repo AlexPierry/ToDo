@@ -126,8 +126,8 @@ public class TarefaActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intencao, 0);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        // Notificar no início do minuto
-        alarmManager.set(AlarmManager.RTC_WAKEUP, tarefa.dataAlarme, pendingIntent);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, tarefa.dataAlarme, pendingIntent);
     }
 
 
