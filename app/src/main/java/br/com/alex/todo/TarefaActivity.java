@@ -76,10 +76,10 @@ public class TarefaActivity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             ano = year;
-            mes = monthOfYear + 1;
+            mes = monthOfYear;
             dia = dayOfMonth;
 
-            txData.setText(String.format("%02d", dia) + "/" + String.format("%02d", mes) + "/" + ano);
+            txData.setText(String.format("%02d", dia) + "/" + String.format("%02d", mes + 1) + "/" + ano);
         }
     };
 
