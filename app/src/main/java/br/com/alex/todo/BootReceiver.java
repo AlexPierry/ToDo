@@ -29,15 +29,12 @@ public class BootReceiver extends BroadcastReceiver {
                     Tarefa tarefa = listaTarefas.getItem(i);
                     if (tarefa.dataAlarme > System.currentTimeMillis()) {
                         Bundle bundle = new Bundle();
-                        bundle.putLong("tarefaId", tarefa.id);
-                        bundle.putString("tarefaTitulo", tarefa.titulo);
-                        bundle.putString("tarefaDescricao", tarefa.descricao);
-                        bundle.putString("tarefaHora", String.valueOf(tarefa.dataAlarme));
+                        bundle.putSerializable("tarefa", tarefa);
 
                         Intent intencao = new Intent(context, NotificaAlarme.class);
                         intencao.putExtras(bundle);
 
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intencao, 0);
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int)tarefa.id, intencao, PendingIntent.FLAG_UPDATE_CURRENT);
 
                         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
 

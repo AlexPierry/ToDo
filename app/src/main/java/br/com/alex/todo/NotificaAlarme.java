@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 
+import br.com.alex.todo.model.Tarefa;
+
 /**
  * Created by ALEX-NOTE on 22/10/2015.
  */
@@ -18,12 +20,14 @@ public class NotificaAlarme extends BroadcastReceiver {
         Intent newIntent = new Intent(context, CancelaAlarme.class);
         newIntent.putExtras(intent.getExtras());
 
+        Tarefa tarefa = (Tarefa)intent.getExtras().getSerializable("tarefa");
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification nt = new Notification.Builder(context)
                 .setTicker("ToDo - Lembrete")
-                .setContentTitle(intent.getExtras().getString("tarefaTitulo"))
-                .setContentText(intent.getExtras().getString("tarefaDescricao"))
+                .setContentTitle(tarefa.titulo)
+                .setContentText(tarefa.descricao)
                 .setSmallIcon(R.mipmap.todo_icon)
                 .setContentIntent(pendingIntent)
                 .setVibrate(new long[]{500, 500, 500, 500, 500})
@@ -33,7 +37,6 @@ public class NotificaAlarme extends BroadcastReceiver {
                 .build();
 
         NotificationManager nm = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-        long tarefaId = intent.getExtras().getLong("tarefaId");
-        nm.notify((int)tarefaId , nt);
+        nm.notify((int)tarefa.id , nt);
     }
 }

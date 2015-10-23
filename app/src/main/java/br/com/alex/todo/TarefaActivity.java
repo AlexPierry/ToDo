@@ -79,7 +79,7 @@ public class TarefaActivity extends AppCompatActivity {
             mes = monthOfYear + 1;
             dia = dayOfMonth;
 
-            txData.setText(dia + "/" + mes + "/" + ano);
+            txData.setText(String.format("%02d", dia) + "/" + String.format("%02d", mes) + "/" + ano);
         }
     };
 
@@ -90,7 +90,7 @@ public class TarefaActivity extends AppCompatActivity {
             hora = hourOfDay;
             minuto = minute;
 
-            txHora.setText(hora + ":" + minute);
+            txHora.setText(String.format("%02d", hora) + ":" + String.format("%02d", minute));
         }
     };
 
@@ -117,13 +117,10 @@ public class TarefaActivity extends AppCompatActivity {
         Intent intencao = new Intent(this, NotificaAlarme.class);
 
         Bundle bundle = new Bundle();
-        bundle.putLong("tarefaId", tarefa.id);
-        bundle.putString("tarefaTitulo", tarefa.titulo);
-        bundle.putString("tarefaDescricao", tarefa.descricao);
-        bundle.putString("tarefaHora", String.valueOf(tarefa.dataAlarme));
+        bundle.putSerializable("tarefa", tarefa);
         intencao.putExtras(bundle);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intencao, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int)tarefa.id, intencao, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 

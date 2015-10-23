@@ -1,11 +1,11 @@
 package br.com.alex.todo.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by ALEX-NOTE on 20/10/2015.
  */
-public class Tarefa {
+public class Tarefa implements Serializable{
     public long id;
     public String titulo;
     public String descricao;

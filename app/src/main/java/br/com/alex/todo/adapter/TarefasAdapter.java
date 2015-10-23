@@ -1,6 +1,7 @@
 package br.com.alex.todo.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,10 @@ public class TarefasAdapter extends ArrayAdapter<Tarefa> {
         tvDescricao.setText(tarefa.descricao);
         tvData.setText(dtFormat.format(tarefa.dataAlarme));
         tvId.setText(String.valueOf(tarefa.id));
+
+        if (tarefa.dataAlarme < System.currentTimeMillis()) {
+            tvData.setTextColor(Color.RED);
+        }
 
         return convertView;
     }
